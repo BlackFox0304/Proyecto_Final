@@ -11,7 +11,21 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //
-    public function register(Request $request) {}
+    public function register(Request $request)
+    {
+        //validar datos
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        Auth::login($user);
+
+        return redirect(route('privada'));
+    }
 
     public function login(Request $request) {}
 
