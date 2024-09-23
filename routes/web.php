@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use GuzzleHttp\Middleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,7 +10,7 @@ Route::get('/', function () {
 
 Route::view('/login', "login")->name('login');
 Route::view('/registro', "register")->name('registro');
-Route::view('/privada', "secret")->name('privada');
+Route::view('/privada', "secret")->middleware('auth')->name('privada');
 
 
 Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
